@@ -1,4 +1,4 @@
-import { config } from 'config'
+import { config } from '../../config'
 import { useQuery } from 'react-query'
 import { Account } from '../../../types'
 

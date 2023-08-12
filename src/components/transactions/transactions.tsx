@@ -3,12 +3,15 @@ import { Transaction as TransactionType } from '../../../types'
 import './index.css'
 import { Transaction } from './item'
 import { useGetTransactionsQuery } from './transactions.service'
+import { Loading } from 'components/loading'
 
 const isExpense = (transaction: TransactionType) => transaction.amount.value < 0
 const isIncome = (transaction: TransactionType) => transaction.amount.value > 0
 
 const Expenses = () => {
-  const { data: transactions } = useGetTransactionsQuery()
+  const { data: transactions, isLoading } = useGetTransactionsQuery()
+
+  if (isLoading) return <Loading />
 
   return (
     <table aria-label='Expenses'>
@@ -29,7 +32,9 @@ const Expenses = () => {
 }
 
 const Income = () => {
-  const { data: transactions } = useGetTransactionsQuery()
+  const { data: transactions, isLoading } = useGetTransactionsQuery()
+
+  if (isLoading) return <Loading />
 
   return (
     <table aria-label='Income'>

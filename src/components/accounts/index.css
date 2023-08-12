@@ -5,11 +5,16 @@
 }
 
 .account {
+  display: flex;
+  flex-direction: column;
   background: var(--background-800);
   padding: var(--spacer-large);
   text-align: left;
+  border-radius: var(--spacer-small);
+  gap: var(--spacer-small);
 }
 
 .total {
   color: var(--primary-300);
+  font-size: var(--font-medium);
 }

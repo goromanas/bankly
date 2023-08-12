@@ -14,7 +14,7 @@
   height: var(--spacer-xxlarge);
   font-size: var(--font-xlarge);
   font-weight: 600;
-  border-radius: var(--spacer-smallall);
+  border-radius: var(--spacer-small);
   border: 2px solid var(--primary-300);
   background-color: var(--background-900);
   text-transform: uppercase;
@@ -25,9 +25,10 @@
 
 table {
   background-color: var(--background-800);
-  border-radius: var(--spacer-smallall);
+  border-radius: var(--spacer-small);
   width: 100%;
   text-align: left;
+  border-collapse: collapse;
 }
 
 td {
@@ -35,7 +36,7 @@ td {
 }
 
 th {
-  color: var(--primary-900);
+  color: var(--primary-300);
   border-bottom: 1px solid var(--primary-300);
   padding: var(--spacer-medium);
   text-align: left;
@@ -46,3 +47,19 @@ th {
   grid-template-columns: min-content 1fr;
   gap: var(--spacer-medium);
 }
+
+.transaction-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.transaction-category {
+  color: var(--primary-300);
+}
+
+.transaction-category::first-letter {
+  text-transform: capitalize;
+}
+
+

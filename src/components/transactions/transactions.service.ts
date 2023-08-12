@@ -7,7 +7,10 @@ const getTransactions = async () => {
   const response = await fetch(endpoints.transactions)
   const data: Transaction[] = await response.json()
 
-  return data
+  return formatTransactionCategory(data)
 }
+
+export const formatTransactionCategory = (data: Transaction[]): Transaction[] =>
+  data.map(({ category, ...rest }) => ({ ...rest, category: category.replaceAll('_', ' ') }))
 
 export const useGetTransactionsQuery = () => useQuery('transaction', getTransactions)

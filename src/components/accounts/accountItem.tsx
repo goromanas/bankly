@@ -1,15 +1,20 @@
-import type { Account } from "../../../types";
-import "./index.css";
+import { formatCurrency } from 'components/transactions/transactions.utils'
+import type { Account } from '../../../types'
+import './index.css'
 
 type Props = {
-  account: Account;
-};
+  account: Account
+}
 
-export const AccountItem = ({ account }: Props) => {
-  return (
-    <div className="account">
-      <div className="total">Total {account.balance.amount.currency}</div>
-      <strong>{account.balance.amount.value}</strong>
-    </div>
-  );
-};
+export const AccountItem = ({
+  account: {
+    balance: {
+      amount: { currency, value }
+    }
+  }
+}: Props) => (
+  <div className='account'>
+    <div className='total'>Total {currency}</div>
+    <strong>{formatCurrency(value, 'en-GB', { currency })}</strong>
+  </div>
+)

@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "lint": "eslint",
     "preview": "vite preview",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -17,9 +18,12 @@
   "license": "ISC",
   "dependencies": {
     "@radix-ui/react-tabs": "^1.0.4",
+    "@tanstack/react-query-devtools": "^4.32.6",
     "msw": "^1.2.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-query": "^3.39.3",
+    "react-query-devtools": "^2.6.3"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",

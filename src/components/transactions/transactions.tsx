@@ -4,13 +4,15 @@ import './index.css'
 import { Transaction } from './item'
 import { useGetTransactionsQuery } from './transactions.service'
 import { Loading } from 'components/loading'
+import { Error } from 'components/error'
 
 const isExpense = (transaction: TransactionType) => transaction.amount.value < 0
 const isIncome = (transaction: TransactionType) => transaction.amount.value > 0
 
 const Expenses = () => {
-  const { data: transactions, isLoading } = useGetTransactionsQuery()
+  const { data: transactions, isLoading, isError } = useGetTransactionsQuery()
 
+  if (isError) return <Error />
   if (isLoading) return <Loading />
 
   return (
@@ -32,8 +34,9 @@ const Expenses = () => {
 }
 
 const Income = () => {
-  const { data: transactions, isLoading } = useGetTransactionsQuery()
+  const { data: transactions, isLoading, isError } = useGetTransactionsQuery()
 
+  if (isError) return <Error />
   if (isLoading) return <Loading />
 
   return (

@@ -1,13 +1,13 @@
 import { render } from '@testing-library/react'
-import { Loading } from '.'
+import { Error } from '.'
 
 test('should render as expected', () => {
-  const { asFragment } = render(<Loading />)
+  const { asFragment } = render(<Error />)
 
   expect(asFragment()).toMatchInlineSnapshot(`
 <DocumentFragment>
   <div>
-    Loading...
+    Error while fetching data.
   </div>
 </DocumentFragment>
 `)

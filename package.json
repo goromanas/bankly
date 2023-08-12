@@ -17,9 +17,9 @@
   "license": "ISC",
   "dependencies": {
     "@radix-ui/react-tabs": "^1.0.4",
+    "msw": "^1.2.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "msw": "^1.2.2"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -33,6 +33,7 @@
     "ts-jest": "^29.1.1",
     "typescript": "^5.1.6",
     "vite": "^4.3.9",
+    "vite-tsconfig-paths": "^4.2.0",
     "whatwg-fetch": "^3.6.2"
   },
   "msw": {

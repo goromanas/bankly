@@ -13,7 +13,7 @@ export const AccountItem = ({
     }
   }
 }: Props) => (
-  <div className='account'>
+  <div className='account' data-testid={`account-${currency.toLowerCase()}`}>
     <div className='total'>Total {currency}</div>
     <strong>{formatCurrency(value, 'en-GB', { currency })}</strong>
   </div>

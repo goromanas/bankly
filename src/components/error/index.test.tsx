@@ -6,7 +6,9 @@ test('should render as expected', () => {
 
   expect(asFragment()).toMatchInlineSnapshot(`
 <DocumentFragment>
-  <div>
+  <div
+    data-testid="error"
+  >
     Error while fetching data.
   </div>
 </DocumentFragment>

@@ -1,1 +1,1 @@
-export const Error = () => <div>Error while fetching data.</div>
+export const Error = () => <div data-testid='error'>Error while fetching data.</div>

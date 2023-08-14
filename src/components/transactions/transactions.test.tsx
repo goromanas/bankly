@@ -1,11 +1,26 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { TransactionHistory } from '.'
+import { QueryClientProvider } from 'react-query'
+import { queryClient } from 'queryClient'
+import { ReactNode } from 'react'
+
+const Wrapper = ({ children }: { children: ReactNode }) => (
+  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+)
+
+afterEach(async () => {
+  await queryClient.cancelQueries()
+  queryClient.clear()
+})
+
+const renderWithQuery = (component: React.ReactElement<any, string | React.JSXElementConstructor<any>>) =>
+  render(<Wrapper>{component}</Wrapper>)
 
 describe('transaction history', () => {
-  test('the expenses tab should be shown by default', () => {
-    render(<TransactionHistory />)
+  test('the expenses tab should be shown by default', async () => {
+    renderWithQuery(<TransactionHistory />)
 
-    expect(screen.getByText('Transaction History')).toBeInTheDocument()
+    expect(await screen.findByText('Transaction History')).toBeInTheDocument()
 
     const expensesTabTrigger = screen.getByRole('tab', {
       name: 'Expenses'
@@ -13,24 +28,24 @@ describe('transaction history', () => {
 
     expect(expensesTabTrigger).toHaveAttribute('data-state', 'active')
 
-    const expensesTable = screen.getByRole('table', {
+    const expensesTable = await screen.findByRole('table', {
       name: 'Expenses'
     })
 
     expect(expensesTable).toBeInTheDocument()
-    expect(screen.getByText('-20.25')).toBeInTheDocument()
+    expect(screen.getByText('-£20.25')).toBeInTheDocument()
   })
 
-  test.skip('changing between the expenses and income tabs should show different transactions', () => {
-    render(<TransactionHistory />)
+  test('changing between the expenses and income tabs should show different transactions', async () => {
+    renderWithQuery(<TransactionHistory />)
 
-    const expensesTabTrigger = screen.getByRole('tab', {
+    const expensesTabTrigger = await screen.findByRole('tab', {
       name: 'Expenses'
     })
-    const incomeTabTrigger = screen.getByRole('tab', {
+    const incomeTabTrigger = await screen.findByRole('tab', {
       name: 'Income'
     })
-    const expensesTable = screen.getByRole('table', {
+    const expensesTable = await screen.findByRole('table', {
       name: 'Expenses'
     })
     const incomeTable = screen.queryByRole('table', {
@@ -40,12 +55,12 @@ describe('transaction history', () => {
     expect(expensesTable).toBeInTheDocument()
     expect(incomeTable).not.toBeInTheDocument()
 
-    expect(screen.getByText('-20.25')).toBeInTheDocument()
+    expect(await screen.findByText('-£20.25')).toBeInTheDocument()
 
-    incomeTabTrigger.click()
+    fireEvent.mouseDown(incomeTabTrigger)
 
     expect(incomeTabTrigger).toHaveAttribute('data-state', 'active')
     expect(expensesTabTrigger).toHaveAttribute('data-state', 'inactive')
-    expect(screen.queryByText('-20.25')).not.toBeInTheDocument()
+    expect(screen.queryByText('-£20.25')).not.toBeInTheDocument()
   })
 })
